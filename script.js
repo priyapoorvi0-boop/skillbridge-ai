@@ -89,7 +89,12 @@ const roles = [
   },
 ];
 
+
 const learningPlans = {
+  html: "Learn semantic HTML and build a webpage with forms.",
+  css: "Practice layouts, Flexbox, Grid, and responsive styling.",
+  javascript: "Learn functions, arrays, objects, and DOM events.",
+  git: "Practice git add, commit, push, and GitHub repositories.",
   "responsive design":
     "Practice CSS media queries and build a mobile-friendly webpage.",
   testing:
@@ -98,6 +103,7 @@ const learningPlans = {
     "Write test cases for valid, invalid, and empty form inputs.",
   "bug reporting":
     "Document bugs with steps, expected results, and actual results.",
+  python: "Write small Python programs using functions and lists.",
   excel:
     "Practice spreadsheet formulas, sorting, filtering, and charts.",
   sql:
@@ -107,8 +113,18 @@ const learningPlans = {
   "data visualization":
     "Create charts that explain a small dataset.",
   communication:
-    "Practice presenting project results clearly."
+    "Practice presenting project results clearly.",
+  c: "Practice C functions, pointers, arrays, and memory basics.",
+  "c++": "Practice classes, objects, functions, and data structures.",
+  microcontrollers:
+    "Learn microcontroller pins, digital I/O, and serial communication.",
+  sensors:
+    "Connect a sensor and read its values in a small project.",
+  "embedded systems":
+    "Build a simple sensor-based embedded C project."
 };
+
+
 
 // Analyze the candidate's profile
 skillForm.addEventListener("submit", function (event) {
@@ -277,6 +293,7 @@ card.append(
     jobResults.appendChild(card);
   });
 
+  
   // Create personalized learning roadmap
   learningResults.replaceChildren();
 
@@ -284,11 +301,13 @@ card.append(
   heading.textContent = "Personalized Learning Roadmap";
 
   const intro = document.createElement("p");
-  intro.textContent =
-    "Recommended next steps for " + (name || "your profile") + ":";
 
   const roleSelect = document.createElement("select");
   roleSelect.id = "roadmap-role";
+  roleSelect.setAttribute(
+    "aria-label",
+    "Choose your target career role"
+  );
 
   roles.forEach(function (role) {
     const option = document.createElement("option");
@@ -306,15 +325,38 @@ card.append(
       role => role.title === roleSelect.value
     );
 
+    if (!selectedRole) return;
+
+    intro.textContent =
+      "Your learning path for " +
+      selectedRole.title +
+      ", " +
+      (name || "your profile") +
+      ":";
+
+    const matched = selectedRole.skills.filter(
+      skill => skills.includes(skill)
+    );
+
     const missing = selectedRole.skills.filter(
       skill => !skills.includes(skill)
     );
 
+    const summary = document.createElement("p");
+    summary.textContent =
+      "Skills you already have: " +
+      (matched.join(", ") || "None yet");
+
+    const nextHeading = document.createElement("h4");
+    nextHeading.textContent = missing.length
+      ? "Skills to develop next"
+      : "Ready for project practice";
+
+    const list = document.createElement("ol");
+
     const nextSkills = missing.length
       ? missing
       : ["Build a more advanced project"];
-
-    const list = document.createElement("ol");
 
     nextSkills.forEach(function (skill) {
       const item = document.createElement("li");
@@ -328,7 +370,7 @@ card.append(
       list.appendChild(item);
     });
 
-    roadmap.appendChild(list);
+    roadmap.append(summary, nextHeading, list);
   }
 
   roleSelect.addEventListener("change", renderRoadmap);
@@ -345,6 +387,9 @@ card.append(
     roadmap,
     evidence
   );
+
+  renderRoadmap();
+
 
   // Create Skill Passport
   passport.replaceChildren();
@@ -488,34 +533,47 @@ if (savedProfile && savedProfile.skills) {
 }
 
 
+
 const clearProfileButton =
   document.getElementById("clear-profile");
 
-clearProfileButton.addEventListener("click", function () {
-  const confirmed = window.confirm(
-    "Are you sure you want to clear your saved profile?"
-  );
+if (clearProfileButton) {
+  clearProfileButton.addEventListener("click", function () {
+    const confirmed = window.confirm(
+      "Are you sure you want to clear your saved profile?"
+    );
 
-  if (!confirmed) {
-    return;
-  }
+    if (!confirmed) {
+      return;
+    }
 
-  localStorage.removeItem("skillbridge-profile-v1");
+    localStorage.removeItem(PROFILE_STORAGE_KEY);
 
-  document.getElementById("candidate-name").value = "";
-  document.getElementById("education").value = "";
-  document.getElementById("skills-input").value = "";
-  document.getElementById("projects").value = "";
-  
-jobResults.replaceChildren();
-learningResults.replaceChildren();
-passport.replaceChildren();
+    document.getElementById("candidate-name").value = "";
+    document.getElementById("education").value = "";
+    document.getElementById("skills-input").value = "";
+    document.getElementById("projects").value = "";
 
-formMessage.textContent = "Saved profile and results cleared.";
+    jobResults.replaceChildren();
+    learningResults.replaceChildren();
+    passport.replaceChildren();
 
+    const backendResults =
+      document.getElementById("backend-results");
 
-  document.getElementById("form-message").textContent =
-    "Saved profile cleared.";
-});
+    if (backendResults) {
+      backendResults.replaceChildren();
+    }
 
+    if (jobSearchInput) {
+      jobSearchInput.value = "";
+    }
 
+    if (jobSearchMessage) {
+      jobSearchMessage.textContent =
+        "Analyze your profile first to see career matches.";
+    }
+
+    formMessage.textContent = "Saved profile and results cleared.";
+  });
+}

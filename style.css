@@ -1,4 +1,8 @@
-```css
+
+/* ========================================
+   SkillBridge AI — Professional UI
+   ======================================== */
+
 /* ===== Basic Setup ===== */
 * {
     box-sizing: border-box;
@@ -9,12 +13,19 @@
 :root {
     --primary: #5146e5;
     --primary-dark: #3c32b8;
+    --primary-light: #eeedff;
     --secondary: #0d9488;
+    --secondary-light: #ccfbf1;
     --background: #f5f7fc;
     --surface: #ffffff;
     --text: #1e293b;
+    --heading: #172554;
     --muted: #64748b;
     --border: #e2e8f0;
+    --success: #08785f;
+    --shadow: 0 8px 28px rgba(30, 41, 59, 0.06);
+    --shadow-hover: 0 14px 32px rgba(30, 41, 59, 0.10);
+    --radius: 16px;
 }
 
 html {
@@ -23,34 +34,53 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Inter, "Segoe UI", Roboto, Arial, sans-serif;
     background: var(--background);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.7;
+    -webkit-font-smoothing: antialiased;
 }
 
 a {
+    color: var(--primary);
     text-decoration: none;
+    transition: color 0.2s ease;
+}
+
+a:hover {
+    color: var(--primary-dark);
 }
 
 button,
 input,
-textarea {
+textarea,
+select {
     font: inherit;
 }
 
 button,
 a,
 input,
-textarea {
+textarea,
+select {
     outline-offset: 3px;
 }
 
 button:focus-visible,
 a:focus-visible,
 input:focus-visible,
-textarea:focus-visible {
-    outline: 3px solid #8b85ff;
+textarea:focus-visible,
+select:focus-visible {
+    outline: 3px solid #a5a0ff;
+}
+
+button {
+    -webkit-tap-highlight-color: transparent;
+}
+
+::selection {
+    background: #ddd9ff;
+    color: #29216f;
 }
 
 /* ===== Header ===== */
@@ -58,15 +88,18 @@ textarea:focus-visible {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 24px;
-    padding: 20px 7%;
-    background: var(--surface);
+    gap: 28px;
+    padding: 22px max(5%, calc((100% - 1200px) / 2));
+    background: rgba(255, 255, 255, 0.96);
     border-bottom: 1px solid var(--border);
+    box-shadow: 0 3px 16px rgba(30, 41, 59, 0.025);
 }
 
 .brand h2 {
-    font-size: 25px;
-    letter-spacing: -1px;
+    color: var(--heading);
+    font-size: 27px;
+    font-weight: 800;
+    letter-spacing: -1.2px;
     line-height: 1.3;
 }
 
@@ -76,18 +109,20 @@ textarea:focus-visible {
 
 .brand p {
     color: var(--muted);
-    font-size: 12px;
-    letter-spacing: 1px;
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 1.6px;
+    text-transform: uppercase;
 }
 
 nav {
     display: flex;
     flex-wrap: wrap;
-    gap: 22px;
+    gap: 10px 22px;
 }
 
 nav a {
-    color: var(--muted);
+    color: #526078;
     font-size: 14px;
     font-weight: 600;
 }
@@ -98,8 +133,8 @@ nav a:hover {
 
 /* ===== Main Layout ===== */
 main {
-    width: min(1120px, 90%);
-    margin: 32px auto;
+    width: min(1160px, 90%);
+    margin: 36px auto;
 }
 
 .hero {
@@ -118,150 +153,201 @@ main {
 .responsible-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 18px;
-    box-shadow: 0 8px 28px rgba(30, 41, 59, 0.04);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
 }
 
 .hero-content {
-    padding: 42px;
-    background: linear-gradient(135deg, #eeedff, #ffffff 75%);
+    padding: 46px;
+    background: linear-gradient(135deg, #eeedff 0%, #ffffff 78%);
 }
 
 .eyebrow {
     color: var(--primary);
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 800;
-    letter-spacing: 1.8px;
-    margin-bottom: 12px;
+    letter-spacing: 2px;
+    margin-bottom: 14px;
+    text-transform: uppercase;
 }
 
 .hero h1 {
-    font-size: clamp(30px, 4vw, 45px);
-    line-height: 1.18;
-    letter-spacing: -1.5px;
-    margin-bottom: 18px;
+    color: var(--heading);
+    font-size: clamp(32px, 4vw, 48px);
+    font-weight: 800;
+    line-height: 1.17;
+    letter-spacing: -1.8px;
+    margin-bottom: 20px;
 }
 
 .hero-content > p:not(.eyebrow) {
     color: var(--muted);
-    margin-bottom: 26px;
-    max-width: 520px;
+    margin-bottom: 28px;
+    max-width: 540px;
+    font-size: 16px;
 }
 
 .primary-button {
     display: inline-block;
-    background: var(--primary);
-    color: white;
-    padding: 12px 20px;
-    border: none;
-    border-radius: 9px;
+    background: linear-gradient(135deg, var(--primary), #6d5dfc);
+    color: #ffffff;
+    padding: 13px 23px;
+    border: 1px solid transparent;
+    border-radius: 10px;
     font-weight: 700;
     cursor: pointer;
-    transition: background 0.2s;
+    box-shadow: 0 5px 14px rgba(81, 70, 229, 0.20);
+    transition: background 0.2s ease, box-shadow 0.2s ease,
+        transform 0.2s ease;
 }
 
 .primary-button:hover {
     background: var(--primary-dark);
+    color: #ffffff;
+    box-shadow: 0 8px 18px rgba(81, 70, 229, 0.25);
+    transform: translateY(-1px);
+}
+
+.primary-button:active {
+    transform: translateY(0);
 }
 
 .hero-card {
-    padding: 30px;
+    padding: 32px;
 }
 
 .hero-icon {
     display: grid;
     place-items: center;
-    width: 48px;
-    height: 48px;
-    border-radius: 14px;
-    background: #eeedff;
+    width: 52px;
+    height: 52px;
+    border-radius: 15px;
+    background: var(--primary-light);
     color: var(--primary);
-    font-size: 27px;
-    margin-bottom: 18px;
+    font-size: 28px;
+    margin-bottom: 20px;
 }
 
 .hero-card h3 {
-    font-size: 22px;
-    margin-bottom: 8px;
+    color: var(--heading);
+    font-size: 23px;
+    line-height: 1.35;
+    margin-bottom: 10px;
 }
 
 .hero-card > p {
     color: var(--muted);
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .feature {
-    padding: 10px 0;
+    padding: 12px 0;
     border-top: 1px solid var(--border);
     font-size: 14px;
 }
 
 .feature span {
     color: var(--secondary);
-    font-weight: bold;
+    font-weight: 800;
     margin-right: 8px;
 }
 
 /* ===== Sections ===== */
 .section {
-    margin-top: 60px;
+    margin-top: 64px;
     scroll-margin-top: 30px;
 }
 
 .section-heading {
-    margin-bottom: 24px;
+    margin-bottom: 26px;
 }
 
 .section-heading h2 {
-    font-size: 29px;
-    letter-spacing: -0.7px;
-    margin-bottom: 8px;
+    color: var(--heading);
+    font-size: clamp(25px, 3vw, 31px);
+    font-weight: 800;
+    line-height: 1.3;
+    letter-spacing: -0.9px;
+    margin-bottom: 9px;
 }
 
 .section-heading > p:last-child {
     color: var(--muted);
-    max-width: 650px;
+    max-width: 680px;
 }
 
+/* ===== Profile Form ===== */
 .form-card {
-    padding: 30px;
-    max-width: 760px;
+    padding: 34px;
+    max-width: 800px;
+}
+
+#skill-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 18px;
 }
 
 .form-group {
     margin-bottom: 22px;
 }
 
-.form-group label {
+#skill-form .form-group,
+#skill-form > div {
+    min-width: 0;
+}
+
+.form-group label,
+#skill-form label {
     display: block;
+    color: #334155;
     font-size: 14px;
     font-weight: 700;
     margin-bottom: 8px;
 }
 
 .form-group input,
-.form-group textarea {
+.form-group textarea,
+#skill-form input,
+#skill-form select,
+#skill-form textarea {
+    display: block;
     width: 100%;
-    border: 1px solid #cbd5e1;
-    border-radius: 9px;
-    padding: 12px 14px;
-    background: #fff;
+    min-width: 0;
+    padding: 13px 15px;
+    background: #ffffff;
     color: var(--text);
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.form-group textarea {
-    resize: vertical;
+.form-group input::placeholder,
+.form-group textarea::placeholder,
+#skill-form input::placeholder,
+#skill-form textarea::placeholder {
+    color: #94a3b8;
 }
 
 .form-group input:focus,
-.form-group textarea:focus {
+.form-group textarea:focus,
+#skill-form input:focus,
+#skill-form select:focus,
+#skill-form textarea:focus {
     border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(81, 70, 229, 0.10);
+}
+
+.form-group textarea,
+#skill-form textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
 .form-group small {
     display: block;
     color: var(--muted);
-    margin-top: 6px;
+    margin-top: 7px;
     font-size: 12px;
 }
 
@@ -269,85 +355,208 @@ main {
     margin-top: 14px;
     font-size: 14px;
     color: var(--secondary);
+    overflow-wrap: anywhere;
 }
 
-/* ===== Results ===== */
+/* ===== Results Grid ===== */
 .results-grid {
     display: grid;
     grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 18px;
+    gap: 20px;
 }
 
 .placeholder-card {
-    padding: 25px;
+    padding: 28px;
 }
 
 .placeholder-card h3 {
-    margin-bottom: 8px;
+    color: var(--heading);
+    margin-bottom: 10px;
 }
 
 .placeholder-card p {
     color: var(--muted);
 }
 
+/* ===== Job Match Cards ===== */
 .job-card {
     background: var(--surface);
     border: 1px solid var(--border);
-    border-radius: 15px;
-    padding: 24px;
+    border-radius: var(--radius);
+    padding: 26px;
+    margin-bottom: 20px;
+    box-shadow: var(--shadow);
+    overflow-wrap: anywhere;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.job-card:hover {
+    border-color: #d3ceff;
+    box-shadow: var(--shadow-hover);
 }
 
 .job-card h3 {
-    margin-bottom: 8px;
+    color: #312e81;
+    font-size: 20px;
+    line-height: 1.4;
+    margin-bottom: 12px;
 }
 
 .job-card p {
-    color: var(--muted);
+    color: #526078;
     font-size: 14px;
+    line-height: 1.75;
+    overflow-wrap: anywhere;
 }
 
 .match-label {
     display: inline-block;
     margin: 14px 0;
-    padding: 5px 10px;
+    padding: 5px 12px;
     background: #dff7ed;
-    color: #08785f;
-    border-radius: 30px;
+    color: #08785f !important;
+    border: 1px solid #b8eedb;
+    border-radius: 999px;
     font-size: 12px;
-    font-weight: 700;
+    font-weight: 800;
 }
 
-/* ===== Agent Cards ===== */
+.skill-progress {
+    width: 100%;
+    height: 10px;
+    background: #e9e7ff;
+    border-radius: 999px;
+    overflow: hidden;
+    margin: 10px 0 18px;
+}
+
+.skill-progress-fill {
+    height: 100%;
+    width: 0;
+    background: linear-gradient(90deg, var(--primary), #8b5cf6);
+    border-radius: inherit;
+    transition: width 0.5s ease;
+}
+
+.job-card .skill-details {
+    margin-top: 14px;
+    padding: 14px;
+    background: #f8fafc;
+    border: 1px solid #edf0f5;
+    border-radius: 10px;
+}
+
+/* ===== Job Search ===== */
+.job-search {
+    margin: 22px 0;
+}
+
+.job-search label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: 700;
+    color: #312e81;
+}
+
+#job-search-input {
+    width: 100%;
+    max-width: 600px;
+    padding: 13px 15px;
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+    font: inherit;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+#job-search-input:focus {
+    outline: 3px solid #c7d2fe;
+    border-color: var(--primary);
+}
+
+#job-search-message {
+    color: var(--muted);
+    font-size: 14px;
+    margin-top: 8px;
+}
+
+/* ===== Backend Career Recommendations ===== */
+#backend-results {
+    overflow-wrap: anywhere;
+}
+
+#backend-results ul {
+    list-style: none;
+    display: grid;
+    gap: 12px;
+    margin-top: 16px;
+}
+
+#backend-results li {
+    position: relative;
+    padding: 15px 18px 15px 42px;
+    background: #ffffff;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    color: var(--heading);
+    font-weight: 650;
+    overflow-wrap: anywhere;
+}
+
+#backend-results li::before {
+    content: "✓";
+    position: absolute;
+    left: 16px;
+    top: 14px;
+    display: grid;
+    place-items: center;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--secondary-light);
+    color: var(--success);
+    font-size: 12px;
+    font-weight: 800;
+}
+
+/* ===== AI Agent Cards ===== */
 .agent-grid {
     display: grid;
     grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 18px;
+    gap: 20px;
 }
 
 .agent-card {
-    padding: 24px;
-    transition: transform 0.2s, box-shadow 0.2s;
+    padding: 26px;
+    min-width: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .agent-card:hover {
     transform: translateY(-3px);
-    box-shadow: 0 12px 28px rgba(30, 41, 59, 0.08);
+    border-color: #d3ceff;
+    box-shadow: var(--shadow-hover);
 }
 
 .agent-number {
     display: inline-block;
     color: var(--primary);
-    background: #eeedff;
+    background: var(--primary-light);
+    border: 1px solid #dedbff;
     border-radius: 9px;
-    padding: 5px 9px;
+    padding: 5px 10px;
     font-size: 12px;
     font-weight: 800;
-    margin-bottom: 16px;
+    margin-bottom: 17px;
 }
 
 .agent-card h3 {
+    color: var(--heading);
     font-size: 17px;
-    margin-bottom: 8px;
+    line-height: 1.45;
+    margin-bottom: 10px;
 }
 
 .agent-card p {
@@ -355,15 +564,87 @@ main {
     font-size: 14px;
 }
 
+/* ===== Skill Passport ===== */
+#passport-content {
+    margin-top: 20px;
+    padding: 30px;
+    background: #ffffff;
+    border: 1px solid #e0e7ff;
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    color: #1e1b4b;
+    overflow-wrap: anywhere;
+}
+
+#passport-content h3 {
+    color: var(--primary);
+    font-size: 24px;
+    line-height: 1.4;
+    margin-bottom: 18px;
+    border-bottom: 2px solid #e0e7ff;
+    padding-bottom: 13px;
+}
+
+#passport-content p {
+    color: #475569;
+    line-height: 1.8;
+    margin: 12px 0;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--border);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+}
+
+#passport-content p:last-child {
+    border-bottom: none;
+    font-weight: 700;
+    color: var(--success);
+}
+
+/* ===== Learning Roadmap ===== */
+#roadmap-role {
+    display: block;
+    width: 100%;
+    max-width: 420px;
+    margin: 12px 0 20px;
+    padding: 13px 14px;
+    background: #ffffff;
+    color: var(--text);
+    border: 1px solid #cbd5e1;
+    border-radius: 10px;
+}
+
+#learning-results {
+    overflow-wrap: anywhere;
+}
+
+#learning-results ol {
+    padding-left: 26px;
+}
+
+#learning-results li {
+    margin: 13px 0;
+    padding-left: 4px;
+    color: #475569;
+}
+
+#learning-results li::marker {
+    color: var(--primary);
+    font-weight: 800;
+}
+
 /* ===== Responsible AI ===== */
 .responsible-card {
     margin-top: 60px;
-    padding: 30px;
+    padding: 32px;
     border-left: 5px solid var(--secondary);
+    background: linear-gradient(135deg, #ffffff, #f0fdfa);
 }
 
 .responsible-card h2 {
-    font-size: 23px;
+    color: var(--heading);
+    font-size: 24px;
+    line-height: 1.4;
     margin-bottom: 12px;
 }
 
@@ -378,10 +659,10 @@ main {
 
 /* ===== Footer ===== */
 footer {
-    margin-top: 60px;
-    padding: 28px 20px;
+    margin-top: 64px;
+    padding: 32px 20px;
     text-align: center;
-    background: #1e293b;
+    background: #172033;
     color: #e2e8f0;
     font-size: 13px;
 }
@@ -392,11 +673,12 @@ footer p + p {
     margin-top: 5px;
 }
 
-/* ===== Responsive Design ===== */
+/* ===== Responsive: Tablet ===== */
 @media (max-width: 850px) {
     .site-header {
         align-items: flex-start;
         flex-direction: column;
+        gap: 16px;
         padding: 20px 5%;
     }
 
@@ -417,14 +699,37 @@ footer p + p {
     }
 }
 
+/* ===== Responsive: Mobile ===== */
 @media (max-width: 560px) {
+    html {
+        scroll-padding-top: 20px;
+    }
+
+    .site-header {
+        padding: 18px 4%;
+    }
+
+    .brand h2 {
+        font-size: 24px;
+    }
+
+    nav {
+        gap: 10px 14px;
+    }
+
+    nav a {
+        font-size: 13px;
+    }
+
     main {
+        width: 92%;
         margin-top: 20px;
     }
 
     .hero-content,
     .hero-card,
     .form-card,
+    .placeholder-card,
     .agent-card,
     .responsible-card {
         padding: 22px;
@@ -432,10 +737,19 @@ footer p + p {
 
     .hero h1 {
         font-size: 32px;
+        letter-spacing: -1px;
+    }
+
+    .hero-content > p:not(.eyebrow) {
+        font-size: 15px;
     }
 
     .section {
-        margin-top: 42px;
+        margin-top: 44px;
+    }
+
+    .section-heading {
+        margin-bottom: 20px;
     }
 
     .section-heading h2 {
@@ -447,264 +761,101 @@ footer p + p {
         grid-template-columns: 1fr;
     }
 
+    .job-card {
+        padding: 20px;
+    }
+
+    .job-card h3 {
+        font-size: 18px;
+    }
+
     .primary-button {
         text-align: center;
         max-width: 100%;
     }
-}
-```
 
-#passport-content {
-  margin-top: 20px;
-  padding: 28px;
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 18px;
-  box-shadow: 0 8px 28px rgba(30, 41, 59, 0.06);
-}
+    #passport-content {
+        padding: 20px;
+    }
 
-#passport-content h3 {
-  color: #5146e5;
-  font-size: 24px;
-  margin-bottom: 16px;
-}
+    #passport-content h3 {
+        font-size: 21px;
+    }
 
-#passport-content p {
-  color: #475569;
-  padding: 12px 0;
-  border-bottom: 1px solid #e2e8f0;
-  overflow-wrap: anywhere;
+    .responsible-card {
+        margin-top: 44px;
+    }
+
+    footer {
+        margin-top: 44px;
+    }
 }
 
-#passport-content p:last-child {
-  border-bottom: none;
-  font-weight: 700;
-  color: #08785f;
-}
-
-#roadmap-role {
-  width: 100%;
-  max-width: 420px;
-  margin: 12px 0 20px;
-  padding: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
-  background: white;
-}
-
-#learning-results ol {
-  padding-left: 24px;
-}
-
-#learning-results li {
-  margin: 12px 0;
-  color: #475569;
-}
-
-/* Visual Skill Match Score */
-
-.job-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 16px;
-  padding: 24px;
-  margin-bottom: 20px;
-  box-shadow: 0 6px 20px rgba(30, 41, 59, 0.06);
-  transition: box-shadow 0.2s ease;
-}
-
-.job-card:hover {
-  box-shadow: 0 10px 28px rgba(30, 41, 59, 0.12);
-}
-
-.job-card h3 {
-  color: #312e81;
-  font-size: 20px;
-  margin-bottom: 12px;
-}
-
-.job-card p {
-  color: #475569;
-  line-height: 1.6;
-  overflow-wrap: anywhere;
-}
-
-.match-label {
-  color: #5146e5 !important;
-  font-weight: 700;
-  margin-top: 16px;
-}
-
-/* Progress bar container */
-
-.skill-progress {
-  width: 100%;
-  height: 12px;
-  background: #e9e7ff;
-  border-radius: 999px;
-  overflow: hidden;
-  margin: 10px 0 18px;
-}
-
-.skill-progress-fill {
-  height: 100%;
-  width: 0;
-  background: linear-gradient(90deg, #5146e5, #8b5cf6);
-  border-radius: 999px;
-  transition: width 0.5s ease;
-}
-
-/* Skill details */
-
-.job-card .skill-details {
-  margin-top: 14px;
-  padding: 12px;
-  background: #f8fafc;
-  border-radius: 10px;
-}
-
-@media (max-width: 560px) {
-  .job-card {
-    padding: 18px;
-  }
-
-  .job-card h3 {
-    font-size: 18px;
-  }
-}
-
-.job-search {
-  margin: 20px 0;
-}
-
-.job-search label {
-  display: block;
-  margin-bottom: 8px;
-  font-weight: 700;
-  color: #312e81;
-}
-
-#job-search-input {
-  width: 100%;
-  max-width: 600px;
-  padding: 12px 14px;
-  border: 1px solid #cbd5e1;
-  border-radius: 9px;
-  font: inherit;
-}
-
-#job-search-input:focus {
-  outline: 3px solid #c7d2fe;
-  border-color: #5146e5;
-}
-
-#job-search-message {
-  color: #64748b;
-  font-size: 14px;
-}
-
-/* Professional Skill Passport PDF printing */
+/* ===== Skill Passport PDF Printing ===== */
 @media print {
-  body * {
-    visibility: hidden;
-  }
+    @page {
+        margin: 16mm;
+    }
 
-  #passport-content,
-  #passport-content * {
-    visibility: visible;
-  }
+    body {
+        background: #ffffff;
+        color: #1e1b4b;
+        font-size: 12pt;
+    }
 
-  #passport-content {
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    padding: 24px;
-    color: #1e1b4b;
-    background: white;
-  }
+    body * {
+        visibility: hidden;
+    }
 
-  #passport-content h3 {
-    font-size: 26px;
-    margin-bottom: 20px;
-  }
+    #passport-content,
+    #passport-content * {
+        visibility: visible;
+    }
 
-  #passport-content p {
-    font-size: 14px;
-    line-height: 1.7;
-    overflow-wrap: anywhere;
-  }
+    #passport-content {
+        position: absolute;
+        left: 0;
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 20px;
+        background: #ffffff;
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        color: #1e1b4b;
+    }
 
-  button,
-  nav,
-  header,
-  footer,
-  form {
-    display: none !important;
-  }
+    #passport-content h3 {
+        font-size: 26px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #e0e7ff;
+    }
+
+    #passport-content p {
+        font-size: 14px;
+        line-height: 1.7;
+        overflow-wrap: anywhere;
+        break-inside: avoid;
+    }
+
+    button,
+    nav,
+    header,
+    footer,
+    form {
+        display: none !important;
+    }
 }
 
-/* Skill Passport professional styling */
-#passport-content {
-  background: #ffffff;
-  border: 1px solid #e0e7ff;
-  border-radius: 14px;
-  padding: 24px;
-  margin-top: 20px;
-  color: #1e1b4b;
-  overflow-wrap: anywhere;
+/* ===== Reduced Motion Accessibility ===== */
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+    }
 }
-
-#passport-content h3 {
-  color: #4f46e5;
-  font-size: 24px;
-  margin-bottom: 18px;
-  border-bottom: 2px solid #e0e7ff;
-  padding-bottom: 12px;
-}
-
-#passport-content p {
-  line-height: 1.8;
-  margin: 12px 0;
-  white-space: pre-wrap;
-}
-
-@media print {
-  #passport-content {
-    border: none;
-    border-radius: 0;
-    margin: 0;
-    padding: 20px;
-  }
-}
-
-/* Fix SkillBridge profile form layout */
-#skill-form {
-  display: grid;
-  grid-template-columns: 1fr;
-  gap: 16px;
-}
-
-#skill-form label,
-#skill-form input,
-#skill-form select,
-#skill-form textarea {
-  display: block;
-  width: 100%;
-  box-sizing: border-box;
-}
-
-#skill-form input,
-#skill-form select,
-#skill-form textarea {
-  padding: 12px;
-  border: 1px solid #cbd5e1;
-  border-radius: 8px;
-  font: inherit;
-}
-
-#skill-form textarea {
-  min-height: 120px;
-  resize: vertical;
-}
-
