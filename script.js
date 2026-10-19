@@ -142,7 +142,7 @@ skillForm.addEventListener("submit", function (event) {
   // Get career recommendations from the backend
   const backendResults = document.getElementById("backend-results");
 
-  fetch("http://localhost:3000/api/career-match", {
+  fetch("https://skillbridge-ai-backend-ytfw.onrender.com/api/career-match", {
     method: "POST",
     headers: {
       "Content-Type": "application/json"
