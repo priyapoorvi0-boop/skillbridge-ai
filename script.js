@@ -139,6 +139,49 @@ skillForm.addEventListener("submit", function (event) {
     return;
   }
   
+  // Get career recommendations from the backend
+  const backendResults = document.getElementById("backend-results");
+
+  fetch("http://localhost:3000/api/career-match", {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({ skills: skills })
+  })
+    .then(function (response) {
+      if (!response.ok) {
+        throw new Error("Backend request failed");
+      }
+
+      return response.json();
+    })
+    .then(function (data) {
+      backendResults.replaceChildren();
+
+      if (!data.careers || data.careers.length === 0) {
+        backendResults.textContent =
+          "No backend career recommendations found for these skills.";
+        return;
+      }
+
+      const list = document.createElement("ul");
+
+      data.careers.forEach(function (career) {
+        const item = document.createElement("li");
+        item.textContent = career;
+        list.appendChild(item);
+      });
+
+      backendResults.appendChild(list);
+    })
+    .catch(function (error) {
+      console.error("Backend connection error:", error);
+      backendResults.textContent =
+        "Backend unavailable. Please check that the server is running.";
+    });
+
+  
   const profileSaved = saveProfile({
   name: name,
   education: education,
