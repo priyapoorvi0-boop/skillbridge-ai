@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SkillBridge AI | Potential Over Pedigree</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container header-content">
+      <h2>SkillBridge <span>AI</span></h2>
+      <nav>
+        <a href="#home">Home</a>
+        <a href="#profile">Skill Profile</a>
+        <a href="#careers">Career Matches</a>
+        <a href="#learning">Learning Roadmap</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <section id="home" class="hero">
+      <p class="eyebrow">SKILLS-FIRST CAREER DISCOVERY</p>
+      <h1>Potential Over <span>Pedigree.</span></h1>
+      <p>
+        Discover career opportunities based on what you can do,
+        what you have built, and what you can learn next.
+      </p>
+      <a href="#profile" class="primary-button">Build My Skill Profile</a>
+    </section>
+
+    <section id="profile" class="section-card">
+      <h2>Create Your Skill Profile</h2>
+      <p>Tell us about your skills, education, and projects.</p>
+
+      <form id="skill-form">
+        <label for="candidate-name">Your Name</label>
+        <input
+  type="text"
+  id="candidate-name"
+  placeholder="Enter your name"
+  required
+>
+
+        <label for="education">Education</label>
+       <input
+  type="text"
+  id="education"
+  placeholder="e.g. B.Tech ECE"
+  required
+>
+
+        <label for="skills-input">Skills</label>
+        <input
+  type="text"
+  id="skills-input"
+  placeholder="e.g. HTML, CSS, JavaScript"
+  required
+>
+        <small>Separate your skills with commas.</small>
+
+        
+<label for="projects">Projects and Experience</label>
+<textarea
+  id="projects"
+  rows="4"
+  placeholder="Enter your projects, one per line. Example: Student Project Tracker - Built using HTML, CSS and JavaScript."
+></textarea>
+
+
+        <button type="submit" id="analyze-button" class="primary-button">
+          Analyze My Profile
+        </button>
+
+        <p id="form-message" role="status" aria-live="polite"></p>
+      </form>
+    </section>
+
+    <section id="careers" class="section-card">
+      <h2>Your Career Matches</h2>
+      <p>Explore sample roles based on your listed skills.</p>
+      
+<div class="job-search">
+  <label for="job-search-input">Search career matches</label>
+  <input
+    type="search"
+    id="job-search-input"
+    placeholder="Search by job title or skill..."
+  >
+  <p id="job-search-message" role="status" aria-live="polite"></p>
+</div>
+
+      <div id="job-results" class="results-grid">
+        <article class="placeholder-card">
+          <h3>Your results will appear here</h3>
+          <p>Create your profile to see sample career matches.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="learning" class="section-card">
+      <h2>Your Learning Roadmap</h2>
+      <p>Find skills to develop for your target role.</p>
+
+      <div id="learning-results">
+        <p>Your personalized roadmap will appear after profile analysis.</p>
+      </div>
+    </section>
+
+    <section id="passport" class="section-card">
+      <h2>Your Skill Passport</h2>
+      <p>
+        A summary of your skills, education, projects, and best sample role.
+      </p>
+
+      <div id="passport-content">
+        <p>Your Skill Passport will appear here after profile analysis.</p>
+      </div>
+
+      <!-- Download button goes here -->
+      <button
+        type="button"
+        id="download-passport"
+        class="primary-button"
+      >
+        Download Skill Passport
+      </button>
+      <button type="button" id="clear-profile">Clear Profile</button>
+      
+<button type="button" id="download-passport-pdf" class="primary-button">
+  Download Skill Passport as PDF
+</button>
+
+    </section>
+
+    <section id="agents" class="section-card">
+      <h2>Our AI Agent Team</h2>
+      <p>Specialized helpers for different parts of your career journey.</p>
+
+      <div class="agent-grid">
+        <article class="agent-card">
+          <h3>Skill Profiler</h3>
+          <p>Organizes your skills and project evidence.</p>
+        </article>
+
+        <article class="agent-card">
+          <h3>Career Matcher</h3>
+          <p>Compares your skills with sample career requirements.</p>
+        </article>
+
+        <article class="agent-card">
+          <h3>Skill Gap Analyst</h3>
+          <p>Highlights skills you could develop next.</p>
+        </article>
+
+        <article class="agent-card">
+          <h3>Learning Guide</h3>
+          <p>Suggests practical learning activities.</p>
+        </article>
+
+        <article class="agent-card">
+          <h3>Market Insights</h3>
+          <p>Designed for future integration with current job-market data.</p>
+        </article>
+
+        <article class="agent-card">
+          <h3>Fairness Monitor</h3>
+          <p>Promotes skills-first evaluation and transparent results.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="disclaimer">
+      <h3>Responsible AI Notice</h3>
+      <p>
+        Career matches are illustrative results based on sample skill lists.
+        They are not real-time job listings, hiring guarantees, or a measure
+        of your overall potential.
+      </p>
+    </section>
+
+  </main>
+
+  <footer>
+    <p>SkillBridge AI — Potential Over Pedigree</p>
+  </footer>
+
+</body>
+</html>
